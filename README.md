@@ -82,7 +82,8 @@ Usually looking like this:
 ```...\Palworld\Pal\Binaries\Win64\ue4ss\Mods```
 
 ### 2. Download a release from this repo
-### 3. Extract its contents to the ```...\Mods``` folder
+### 3. Install the mod
+Download the latest release of this mod and extract its contents to your ```...\Mods``` folder.
 After the folder structure should look something like this:
 ```
 ue4ss/
@@ -95,7 +96,23 @@ ue4ss/
             ├── config.lua (Configuration file, required by main.lua)
             └── main.lua (The main script)
 ```
-### 4. Enable the Mod in UE4SS
+### 4. Apply Engine Compatibility Config
+Due to updates in the game engine, a special configuration file is required for UE4SS to function correctly with Palworld's memory layout.
+
+To obtain this required configuration:
+
+- Download the corresponding [UE4SS release optimized for Palworld](https://github.com/Okaetsu/RE-UE4SS/releases/tag/experimental-palworld).
+- Look for the ```MemberVariableLayout.ini``` file within the downloaded ```ue4ss``` folder.
+- Copy this file and paste it into your main Palworld UE4SS installation folder ```...\Palworld\Pal\Binaries\Win64\ue4ss```.
+
+The final placement should look like this:
+
+```
+ue4ss/
+└── MemberVariableLayout.ini
+```
+
+### 5. Enable the Mod in UE4SS
 Go back to the main UE4SS Mods folder ```...ue4ss\Mods``` and open the ```mods.txt``` file.
 Add the following line to the end of the file:
 ```
