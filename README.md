@@ -81,7 +81,10 @@ Navigate to the UE4SS Mods folder.
 Usually looking like this:
 ```...\Palworld\Pal\Binaries\Win64\ue4ss\Mods```
 
-### 2. Download a release from this repo
+### 2. Download the Mod
+Locate and download the [newest release](https://github.com/Worsthof/recipe-changer/releases).
+The Mod will be in a ```.zip``` file, named ```RecipeChanger.zip```.
+
 ### 3. Install the mod
 Download the latest release of this mod and extract its contents to your ```...\Mods``` folder.
 After this the folder structure should look something like this:
