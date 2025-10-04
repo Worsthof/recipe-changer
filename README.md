@@ -84,7 +84,7 @@ Usually looking like this:
 ### 2. Download a release from this repo
 ### 3. Install the mod
 Download the latest release of this mod and extract its contents to your ```...\Mods``` folder.
-After the folder structure should look something like this:
+After this the folder structure should look something like this:
 ```
 ue4ss/
 └── Mods/
