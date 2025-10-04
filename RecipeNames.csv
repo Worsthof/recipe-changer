@@ -1,0 +1,495 @@
+Category,Name
+Accessories & Utility,Accessory_AirDash1
+Accessories & Utility,Accessory_AirDash2
+Accessories & Utility,Accessory_AirDash3
+Accessories & Utility,Accessory_JumpCount_Increase1
+Accessories & Utility,Accessory_JumpCount_Increase2
+Accessories & Utility,Accessory_JumpPower_Increase
+Accessories & Utility,Accessory_Nonkilling
+Accessories & Utility,Accessory_TalentChecker
+Accessories & Utility,AdditionalInventory_001
+Accessories & Utility,AdditionalInventory_002
+Accessories & Utility,AdditionalInventory_003
+Accessories & Utility,AdditionalInventory_004
+Accessories & Utility,AncientParts2
+Accessories & Utility,AutoMealPouch_Tier1
+Accessories & Utility,AutoMealPouch_Tier2
+Accessories & Utility,AutoMealPouch_Tier3
+Accessories & Utility,AutoMealPouch_Tier4
+Accessories & Utility,AutoMealPouch_Tier5
+Accessories & Utility,Elixir_attack_01
+Accessories & Utility,Elixir_attack_02
+Accessories & Utility,Elixir_hp_01
+Accessories & Utility,Elixir_hp_02
+Accessories & Utility,Elixir_stamina_01
+Accessories & Utility,Elixir_stamina_02
+Accessories & Utility,Elixir_weight_01
+Accessories & Utility,Elixir_weight_02
+Accessories & Utility,Elixir_workspeed_01
+Accessories & Utility,Elixir_workspeed_02
+Accessories & Utility,FishingBait
+Accessories & Utility,FishingBait_1_A
+Accessories & Utility,FishingBait_1_B
+Accessories & Utility,FishingBait_2_A
+Accessories & Utility,FishingBait_2_B
+Accessories & Utility,FishingBait_3_A
+Accessories & Utility,FishingBait_3_B
+Accessories & Utility,Glider_Good
+Accessories & Utility,Glider_Old
+Accessories & Utility,Glider_Super
+Accessories & Utility,Glider_Tera
+Accessories & Utility,GrapplingGun
+Accessories & Utility,GrapplingGun2
+Accessories & Utility,GrapplingGun3
+Accessories & Utility,GrapplingGun4
+Accessories & Utility,GrapplingGun5
+Accessories & Utility,Homeward
+Accessories & Utility,Lantern
+Accessories & Utility,Lantern_High
+Accessories & Utility,Lotus_attack_01
+Accessories & Utility,Lotus_attack_02
+Accessories & Utility,Lotus_hp_01
+Accessories & Utility,Lotus_hp_02
+Accessories & Utility,Lotus_stamina_01
+Accessories & Utility,Lotus_stamina_02
+Accessories & Utility,Lotus_weight_01
+Accessories & Utility,Lotus_weight_02
+Accessories & Utility,Lotus_workspeed_01
+Accessories & Utility,Lotus_workspeed_02
+Accessories & Utility,LuxuryMedicines
+Accessories & Utility,Medicines
+Accessories & Utility,MetalDetector
+Accessories & Utility,MindControlDrug
+Accessories & Utility,Money
+Accessories & Utility,Narcotic
+Accessories & Utility,Opium
+Accessories & Utility,PalDopingShot
+Accessories & Utility,PalHealingGrenade
+Accessories & Utility,PalRevive
+Accessories & Utility,PalUpgradeStone
+Accessories & Utility,PalUpgradeStone1
+Accessories & Utility,PalUpgradeStone2
+Accessories & Utility,PalUpgradeStone3
+Accessories & Utility,PalUpgradeStone4
+Accessories & Utility,Pan
+Accessories & Utility,Poppy
+Accessories & Utility,Potion
+Accessories & Utility,Potion_Extreme
+Accessories & Utility,Potion_High
+Accessories & Utility,Potion_Low
+Accessories & Utility,PredatorCrystal
+Accessories & Utility,Quartz
+Accessories & Utility,RainbowCrystal
+Accessories & Utility,RepairKit
+Accessories & Utility,Salvage_TreasureBoxKey01
+Accessories & Utility,Salvage_TreasureBoxKey02
+Accessories & Utility,StatusPointResetSan
+Accessories & Utility,Torch
+Accessories & Utility,Unlock_Picking_Tier1
+Accessories & Utility,Unlock_Picking_Tier2
+Accessories & Utility,Unlock_Picking_Tier3
+Palspheres,CryStal_PalSphere
+Palspheres,CryStal_PalSphere_Exotic
+Palspheres,CryStal_PalSphere_Giga
+Palspheres,CryStal_PalSphere_Legend
+Palspheres,CryStal_PalSphere_Master
+Palspheres,CryStal_PalSphere_Mega
+Palspheres,CryStal_PalSphere_Tera
+Palspheres,CryStal_PalSphere_Ultimate
+Palspheres,PalSphere
+Palspheres,PalSphere_Exotic
+Palspheres,PalSphere_Giga
+Palspheres,PalSphere_Legend
+Palspheres,PalSphere_Master
+Palspheres,PalSphere_Mega
+Palspheres,PalSphere_Tera
+Palspheres,PalSphere_Ultimate
+Ammunition,Arrow
+Ammunition,Arrow_Fire
+Ammunition,Arrow_Poison
+Ammunition,AssaultRifleBullet
+Ammunition,EnergyLauncherBullet
+Ammunition,EnergyShotgunBullet
+Ammunition,ExplosiveBullet
+Ammunition,FlamethrowerBullet
+Ammunition,GatlingBullet
+Ammunition,GrenadeBullet
+Ammunition,HandgunBullet
+Ammunition,InkBullet
+Ammunition,LaserBullet
+Ammunition,LaserGatlingBullet
+Ammunition,MeteorBullet
+Ammunition,MissileBullet
+Ammunition,PalDopingShotBullet
+Ammunition,ReinforcedArrow
+Ammunition,RifleBullet
+Ammunition,RoughBullet
+Ammunition,SFArrow
+Ammunition,ShotgunBullet
+Weapons & Tools,AssaultRifle_Default1
+Weapons & Tools,AssaultRifle_Default2
+Weapons & Tools,AssaultRifle_Default3
+Weapons & Tools,AssaultRifle_Default4
+Weapons & Tools,AssaultRifle_Default5
+Weapons & Tools,Axe_Steal
+Weapons & Tools,Axe_Tier_00
+Weapons & Tools,Axe_Tier_01
+Weapons & Tools,Axe_Tier_02
+Weapons & Tools,Bat
+Weapons & Tools,Bat2
+Weapons & Tools,BeamSword
+Weapons & Tools,Bow_Fire
+Weapons & Tools,Bow_Poison
+Weapons & Tools,Bow_Triple
+Weapons & Tools,BowGun
+Weapons & Tools,BowGun_Fire
+Weapons & Tools,BowGun_Poison
+Weapons & Tools,ChargeLaserRifle
+Weapons & Tools,DecalGun
+Weapons & Tools,DoubleBarrelShotgun
+Weapons & Tools,ElecBaton
+Weapons & Tools,EnergyRocketLauncher
+Weapons & Tools,EnergyShotgun
+Weapons & Tools,FishingRod_01
+Weapons & Tools,FishingRod_02
+Weapons & Tools,FishingRod_03
+Weapons & Tools,FlameThrower
+Weapons & Tools,GatlingGun
+Weapons & Tools,GrenadeLauncher
+Weapons & Tools,GuidedMissileLauncher
+Weapons & Tools,HandGun_Default
+Weapons & Tools,HomingSphereLauncher
+Weapons & Tools,Katana
+Weapons & Tools,LaserGatlingGun
+Weapons & Tools,LaserRifle
+Weapons & Tools,Launcher_Default
+Weapons & Tools,Launcher_Meteor
+Weapons & Tools,MakeshiftAssaultRifle
+Weapons & Tools,MakeshiftHandgun
+Weapons & Tools,MakeshiftShotgun
+Weapons & Tools,MakeshiftSubmachineGun
+Weapons & Tools,MeatCutterKnife
+Weapons & Tools,MultiGuidedMissileLauncher
+Weapons & Tools,Musket
+Weapons & Tools,OldRevolver
+Weapons & Tools,OverheatRifle
+Weapons & Tools,Pickaxe_Steal
+Weapons & Tools,Pickaxe_Tier_00
+Weapons & Tools,Pickaxe_Tier_01
+Weapons & Tools,Pickaxe_Tier_02
+Weapons & Tools,PumpActionShotgun
+Weapons & Tools,SemiAutoRifle
+Weapons & Tools,SemiAutoShotgun
+Weapons & Tools,SFBow
+Weapons & Tools,SingleShotRifle
+Weapons & Tools,Spear
+Weapons & Tools,Spear_ForestBoss
+Weapons & Tools,Spear_QueenBee
+Weapons & Tools,Spear_SoldierBee
+Weapons & Tools,SphereLauncher
+Weapons & Tools,SphereLauncher_Once
+Weapons & Tools,SubmachineGun
+Weapons & Tools,Sword
+Weapons & Tools,WeakerBow
+Weapons & Tools,YakushimaBlade
+Weapons & Tools,YakushimaBlade002
+Weapons & Tools,YakushimaBlade003
+Weapons & Tools,YakushimaBlade004
+Weapons & Tools,YakushimaBlade005
+Weapons & Tools,YakushimaGun001
+Armor & Shields,ClothArmor
+Armor & Shields,ClothArmorCold
+Armor & Shields,ClothArmorHeat
+Armor & Shields,CopperArmor
+Armor & Shields,CopperArmorCold
+Armor & Shields,CopperArmorHeat
+Armor & Shields,CopperHelmet
+Armor & Shields,FurArmor
+Armor & Shields,FurArmorCold
+Armor & Shields,FurArmorHeat
+Armor & Shields,FurHelmet
+Armor & Shields,IronArmor
+Armor & Shields,IronArmorCold
+Armor & Shields,IronArmorHeat
+Armor & Shields,IronHelmet
+Armor & Shields,PlasticArmor
+Armor & Shields,PlasticArmorCold
+Armor & Shields,PlasticArmorHeat
+Armor & Shields,PlasticArmorWeight
+Armor & Shields,PlasticHelmet
+Armor & Shields,SFArmor
+Armor & Shields,SFArmorCold
+Armor & Shields,SFArmorHeat
+Armor & Shields,SFArmorWeight
+Armor & Shields,SFHelmet
+Armor & Shields,Shield_01
+Armor & Shields,Shield_02
+Armor & Shields,Shield_03
+Armor & Shields,Shield_04
+Armor & Shields,Shield_SF
+Armor & Shields,Shield_Ultra
+Armor & Shields,StealArmor
+Armor & Shields,StealArmorCold
+Armor & Shields,StealArmorHeat
+Armor & Shields,StealHelmet
+Armor & Shields,YakushimaArmor001
+Materials,Bone
+Materials,CarbonFiber
+Materials,CarbonFiber2
+Materials,Cement
+Materials,Charcoal
+Materials,Chromium
+Materials,CopperIngot
+Materials,CopperOre
+Materials,CrudeOil
+Materials,Fiber
+Materials,FireOrgan
+Materials,Gunpowder2
+Materials,Horn
+Materials,IceOrgan
+Materials,IronIngot
+Materials,Leather
+Materials,MachineParts
+Materials,MachineParts2
+Materials,ManganeseIngot
+Materials,ManganeseOre
+Materials,Milk
+Materials,NightStone
+Materials,Pal_crystal_S
+Materials,PalCrystal_Ex
+Materials,PalDarkParts
+Materials,PalFluid
+Materials,PalOil
+Materials,Plastic
+Materials,Polymer
+Materials,Sulfur
+Materials,StainlessSteel
+Materials,StealIngot
+Materials,stone
+Materials,Stone
+Materials,Venom
+Materials,Wool
+Materials,YakushimaIngot001
+Materials,cloth
+Materials,Cloth
+Materials,Cloth2
+Materials,cloth2
+Raw/Produce,Berries
+Raw/Produce,Carrot
+Raw/Produce,CaveMushroom
+Raw/Produce,Egg
+Raw/Produce,Herbs
+Raw/Produce,Honey
+Raw/Produce,Lettuce
+Raw/Produce,Meat_BerryGoat
+Raw/Produce,Meat_Boar
+Raw/Produce,Meat_ChickenPal
+Raw/Produce,Meat_CowPal
+Raw/Produce,Meat_Deer
+Raw/Produce,Meat_Eagle
+Raw/Produce,Meat_GrassMammoth
+Raw/Produce,Meat_IceCrocodile
+Raw/Produce,Meat_IceDeer
+Raw/Produce,Meat_JellyfishFairy
+Raw/Produce,Meat_JellyfishGhost
+Raw/Produce,Meat_Kelpie
+Raw/Produce,Meat_LazyCatfish
+Raw/Produce,Meat_OctopusGirl
+Raw/Produce,Meat_SakuraSaurus
+Raw/Produce,Meat_SheepBall
+Raw/Produce,Mushroom
+Raw/Produce,Onion
+Raw/Produce,PalItem_CaptainPenguin
+Raw/Produce,PalItem_CatMage
+Raw/Produce,PalItem_ColorfulBird
+Raw/Produce,PalItem_LizardMan
+Raw/Produce,PalItem_MopBaby
+Raw/Produce,PalItem_NegativeOctopus
+Raw/Produce,PalItem_PinkRabbit
+Raw/Produce,PalItem_PlantSlime
+Raw/Produce,PalItem_RaijinDaughter
+Raw/Produce,PoisonMushroom
+Raw/Produce,Potato
+Raw/Produce,Sweet
+Raw/Produce,Tomato
+Raw/Produce,Wheat
+Raw/Produce,wood
+Raw/Produce,Wood
+Cooked Food,BaconEggs
+Cooked Food,Baked_Berries
+Cooked Food,BakedMeat_BerryGoat
+Cooked Food,BakedMeat_Boar
+Cooked Food,BakedMeat_ChickenPal
+Cooked Food,BakedMeat_CowPal
+Cooked Food,BakedMeat_Deer
+Cooked Food,BakedMeat_Eagle
+Cooked Food,BakedMeat_GrassMammoth
+Cooked Food,BakedMeat_IceCrocodile
+Cooked Food,BakedMeat_IceDeer
+Cooked Food,BakedMeat_Kelpie
+Cooked Food,BakedMeat_LazyCatfish
+Cooked Food,BakedMeat_SakuraSaurus
+Cooked Food,BakedMeat_SheepBall
+Cooked Food,BakedMushroom
+Cooked Food,Cake
+Cooked Food,Carbonara
+Cooked Food,Cheeseburger
+Cooked Food,ChickenSaute
+Cooked Food,Chowder
+Cooked Food,Curry
+Cooked Food,DeerLocoMoco
+Cooked Food,DeerStew
+Cooked Food,Eaglestew
+Cooked Food,FriedChicken
+Cooked Food,FriedEggs
+Cooked Food,FriedKelpie
+Cooked Food,GenghisKhan
+Cooked Food,Gratin
+Cooked Food,GrilledSheepHerbs
+Cooked Food,Gyoza
+Cooked Food,Hamburger
+Cooked Food,HotDog
+Cooked Food,Hotmilk
+Cooked Food,JamBun
+Cooked Food,JellyfishFairy_jelly
+Cooked Food,JellyfishGhost_jelly
+Cooked Food,MarinatedMushrooms
+Cooked Food,MeatAndPotatoes
+Cooked Food,Minestrone
+Cooked Food,MushroomJuice
+Cooked Food,MushroomSoup
+Cooked Food,OctopusGirl_Takoyaki
+Cooked Food,Omelet
+Cooked Food,Pancake
+Cooked Food,Pizza
+Cooked Food,PotatoChips
+Cooked Food,Quiche
+Cooked Food,Salad
+Cooked Food,Seafood_Salada
+Cooked Food,SpringRolls
+Cooked Food,StewedIceDeer
+Cooked Food,StirFriedVegetables
+Cooked Food,Yakisoba
+Explosives,FragGrenade
+Explosives,FragGrenade_Dark
+Explosives,FragGrenade_Dragon
+Explosives,FragGrenade_Elec
+Explosives,FragGrenade_Fire
+Explosives,FragGrenade_Ground
+Explosives,FragGrenade_Ice
+Explosives,FragGrenade_Leaf
+Explosives,FragGrenade_Super
+Explosives,FragGrenade_Water
+Blueprints & Modules,Blueprint_AssaultRifle_Default2
+Blueprints & Modules,Blueprint_AssaultRifle_Default3
+Blueprints & Modules,Blueprint_AssaultRifle_Default4
+Blueprints & Modules,Blueprint_AssaultRifle_Default5
+Blueprints & Modules,Blueprint_BowGun
+Blueprints & Modules,Blueprint_BowGun_Fire
+Blueprints & Modules,Blueprint_BowGun_Poison
+Blueprints & Modules,Blueprint_ChargeLaserRifle
+Blueprints & Modules,Blueprint_ClothArmor
+Blueprints & Modules,Blueprint_ClothArmorCold
+Blueprints & Modules,Blueprint_ClothArmorHeat
+Blueprints & Modules,Blueprint_CompoundBow
+Blueprints & Modules,Blueprint_CopperArmor
+Blueprints & Modules,Blueprint_CopperArmorCold
+Blueprints & Modules,Blueprint_CopperArmorHeat
+Blueprints & Modules,Blueprint_CopperHelmet
+Blueprints & Modules,Blueprint_DoubleBarrelShotgun
+Blueprints & Modules,Blueprint_EnergyRocketLauncher
+Blueprints & Modules,Blueprint_EnergyShotgun
+Blueprints & Modules,Blueprint_FishingRod_01
+Blueprints & Modules,Blueprint_FishingRod_02
+Blueprints & Modules,Blueprint_FishingRod_03
+Blueprints & Modules,Blueprint_FlameThrower
+Blueprints & Modules,Blueprint_FurArmor
+Blueprints & Modules,Blueprint_FurArmorCold
+Blueprints & Modules,Blueprint_FurArmorHeat
+Blueprints & Modules,Blueprint_FurHelmet
+Blueprints & Modules,Blueprint_GatlingGun
+Blueprints & Modules,Blueprint_GrenadeLauncher
+Blueprints & Modules,Blueprint_GuidedMissileLauncher
+Blueprints & Modules,Blueprint_HandGun_Default
+Blueprints & Modules,Blueprint_Head001
+Blueprints & Modules,Blueprint_Head002
+Blueprints & Modules,Blueprint_Head003
+Blueprints & Modules,Blueprint_Head004
+Blueprints & Modules,Blueprint_Head005
+Blueprints & Modules,Blueprint_Head006
+Blueprints & Modules,Blueprint_Head007
+Blueprints & Modules,Blueprint_Head008
+Blueprints & Modules,Blueprint_Head009
+Blueprints & Modules,Blueprint_Head010
+Blueprints & Modules,Blueprint_Head011
+Blueprints & Modules,Blueprint_Head012
+Blueprints & Modules,Blueprint_Head013
+Blueprints & Modules,Blueprint_Head014
+Blueprints & Modules,Blueprint_Head015
+Blueprints & Modules,Blueprint_Head016
+Blueprints & Modules,Blueprint_Head017
+Blueprints & Modules,Blueprint_HeadEquip025
+Blueprints & Modules,Blueprint_HeadEquip026
+Blueprints & Modules,Blueprint_HeadEquip028
+Blueprints & Modules,Blueprint_HeadEquip031
+Blueprints & Modules,Blueprint_HeadEquip032
+Blueprints & Modules,Blueprint_IronArmor
+Blueprints & Modules,Blueprint_IronArmorCold
+Blueprints & Modules,Blueprint_IronArmorHeat
+Blueprints & Modules,Blueprint_IronHelmet
+Blueprints & Modules,Blueprint_LaserGatlingGun
+Blueprints & Modules,Blueprint_LaserRifle
+Blueprints & Modules,Blueprint_Launcher_Default
+Blueprints & Modules,Blueprint_Launcher_Meteor
+Blueprints & Modules,Blueprint_MakeshiftAssaultRifle
+Blueprints & Modules,Blueprint_MakeshiftHandgun
+Blueprints & Modules,Blueprint_MakeshiftShotgun
+Blueprints & Modules,Blueprint_MakeshiftSubmachineGun
+Blueprints & Modules,Blueprint_MultiGuidedMissileLauncher
+Blueprints & Modules,Blueprint_Musket
+Blueprints & Modules,Blueprint_OldRevolver
+Blueprints & Modules,Blueprint_OverheatRifle
+Blueprints & Modules,Blueprint_PalSummon_YakushimaBoss002
+Blueprints & Modules,Blueprint_PlasticArmor
+Blueprints & Modules,Blueprint_PlasticArmorCold
+Blueprints & Modules,Blueprint_PlasticArmorHeat
+Blueprints & Modules,Blueprint_PlasticArmorWeight
+Blueprints & Modules,Blueprint_PlasticHelmet
+Blueprints & Modules,Blueprint_PumpActionShotgun
+Blueprints & Modules,Blueprint_Salvage_FishingBait_1_A
+Blueprints & Modules,Blueprint_Salvage_FishingBait_1_B
+Blueprints & Modules,Blueprint_Salvage_FishingBait_2_A
+Blueprints & Modules,Blueprint_Salvage_FishingBait_2_B
+Blueprints & Modules,Blueprint_Salvage_FishingBait_3_B
+Blueprints & Modules,Blueprint_Salvage_TreasureBoxKey01
+Blueprints & Modules,Blueprint_SemiAutoRifle
+Blueprints & Modules,Blueprint_SemiAutoShotgun
+Blueprints & Modules,Blueprint_SFArmor
+Blueprints & Modules,Blueprint_SFArmorCold
+Blueprints & Modules,Blueprint_SFArmorHeat
+Blueprints & Modules,Blueprint_SFArmorWeight
+Blueprints & Modules,Blueprint_SFBow
+Blueprints & Modules,Blueprint_SFHelmet
+Blueprints & Modules,Blueprint_SingleShotRifle
+Blueprints & Modules,Blueprint_StealArmor
+Blueprints & Modules,Blueprint_StealArmorCold
+Blueprints & Modules,Blueprint_StealArmorHeat
+Blueprints & Modules,Blueprint_StealHelmet
+Blueprints & Modules,Blueprint_SubmachineGun
+Blueprints & Modules,Blueprint_WeakerBow
+Blueprints & Modules,Blueprint_YakushimaArmor001
+Blueprints & Modules,Blueprint_YakushimaBlade002
+Blueprints & Modules,Blueprint_YakushimaBlade003
+Blueprints & Modules,Blueprint_YakushimaBlade004
+Blueprints & Modules,Blueprint_YakushimaGun001
+Blueprints & Modules,Blueprint_YakushimaHeadEquip001
+Blueprints & Modules,Blueprint_YakushimaHeadEquip002
+Blueprints & Modules,Blueprint_YakushimaHeadEquip003
+Blueprints & Modules,Blueprint_YakushimaHeadEquip004
+Blueprints & Modules,Blueprint_YakushimaLantern001
+Blueprints & Modules,SphereModule_Curve
+Blueprints & Modules,SphereModule_Curve2
+Blueprints & Modules,SphereModule_Heavy
+Blueprints & Modules,SphereModule_Homing
+Blueprints & Modules,SphereModule_Sniper
+Blueprints & Modules,SphereModule_Sniper2

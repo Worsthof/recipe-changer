@@ -1,2 +1,110 @@
-# recipe-changer
-A mod for Palworld written in Lua for the UE4SS framework that allows players to easily customize the work time, material costs, output quantity and XP rate of any existing item recipe.
+# Palworld Recipe Changer Mod
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
+
+## 💡 What is it About?
+
+This mod is designed for simple **quality-of-life** changes or balance adjustments. It's written in Lua using the [UE4SS scripting library](https://docs.ue4ss.com/). It modifies the core item crafting data table (`DT_ItemRecipeDataTable`) at runtime. Instead of replacing game files, it intercepts the data and overwrites specific recipe parameters defined by the user in a configuration file (`config.lua`).
+
+This allows you to globally adjust four key recipe properties:
+
+* **`OutputAmount`**: The number of items produced per single craft.
+* **`WorkAmount`**: The base time (in seconds) required for the craft.
+* **`Materials`**: Which materials are required and the amount of each one.
+* **`ExpRate`**: The multiplier for the experience granted upon completing the craft.
+
+---
+
+## ⚙️ How to Use
+
+All modifications are managed within the **`config.lua`** file.
+
+### 1. Identify the Recipe Name
+
+The key for every modification must be the **exact internal name** of the recipe as found in the game files. These names are **case-sensitive**.
+
+| Item Category | Example Key |
+| :--- | :--- |
+| **Pal Spheres** | `"PalSphere"`, `"PalSphere_Mega"`, `"PalSphere_Legend"` |
+| **Weapons** | `"AssaultRifle_Default1"`, `"Musket"`, `"Spear"` |
+| **Ammunition** | `"RifleBullet"`, `"ShotgunBullet"`, `"Arrow"` |
+| **Materials** | `"IronIngot"`, `"CarbonFiber"`, `"Cloth"` |
+| **Food** | `"Cake"`, `"BakedMeat_ChickenPal"`, `"Pizza"` |
+
+A small exported list **`RecipeNames.csv`** is available for easier access.
+I have not tested every name on this list, but no issues have been encountered so far.
+It is AI generated so take it with a grain of salt.
+
+### 2. Configure a Recipe
+
+In the **`config.lua`** file locate the "Recipes" collection and simply add you desired modifications based on the provided example.
+
+#### Modifying Materials
+
+Materials are indexed from [1] to [5].
+- To change a material: Provide a new Name (e.g., "IronIngot") and a new Amount.
+- To remove a material: Set the Name to "None" and the Amount to 0.
+
+Example config:
+```lua
+
+local config = {
+    Recipes = {
+        ["PalSphere"] = {
+            OutputAmount = 10,
+            WorkAmount = 10,
+            ExpRate = 1,
+            Materials = {
+                [1] = { Name = "Wood", Amount = 5 },
+                [2] = { Name = "Stone", Amount = 10 },
+                [3] = { Name = "None", Amount = 0 }, 
+            },
+        },
+    },
+    Verbose = false
+}
+
+```
+
+---
+
+## ⬇️ Prerequisites
+This mod requires a working installation of UE4SS (Unreal Engine 4/5 Scripting System) and currently will only work with latest "experimental" version. Visit the [UE4SS repository](https://github.com/UE4SS-RE/RE-UE4SS/releases/tag/experimental-latest) for more details.
+
+---
+
+## 🛠️ Installation
+
+### 1. Locate the Mod Directory
+Navigate to the UE4SS Mods folder:
+Usually looking like this:
+```...\Palworld\Pal\Binaries\Win64\ue4ss\Mods```
+
+### 2. Download a release from this repo
+### 3. Extract its contents to the ```...\Mods``` folder
+After the folder structure should look something like this:
+```
+ue4ss/
+└── Mods/
+    └── RecipeChanger/
+        ├── LICENSE
+        ├── README.md
+        ├── RecipeNames.csv (Optional helper file)
+        └── Scripts/
+            ├── config.lua (Configuration file, required by main.lua)
+            └── main.lua (The main script)
+```
+### 4. Enable the Mod in UE4SS
+Go back to the main UE4SS Mods folder ```...ue4ss\Mods``` and open the ```mods.txt``` file.
+Add the following line to the end of the file:
+```
+RecipeChanger : 1
+```
+
+Save and close ```mods.txt```. The mod is now active and will load the next time you launch Palworld!
+
+---
+
+## 📄 License
+This project is licensed under the MIT License.
