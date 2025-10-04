@@ -77,7 +77,7 @@ This mod requires a working installation of UE4SS (Unreal Engine 4/5 Scripting S
 ## 🛠️ Installation
 
 ### 1. Locate the Mod Directory
-Navigate to the UE4SS Mods folder:
+Navigate to the UE4SS Mods folder.
 Usually looking like this:
 ```...\Palworld\Pal\Binaries\Win64\ue4ss\Mods```
 
