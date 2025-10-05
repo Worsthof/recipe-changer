@@ -1,3 +1,4 @@
+---@type Config
 local Config = require("config")
 
 ---@class PalMasterDataTableAccess_ItemRecipe: UPalMasterDataTableAccess_ItemRecipe
@@ -9,6 +10,10 @@ local IsIniRunning = false
 ---@type PalMasterDataTableAccess_ItemRecipe
 local ItemRecipeDTAccess = nil
 
+-- Maximum number of materials on FPalItemRecipe
+---@type int32
+local MAX_MATERIAL_COUNT = 5
+
 ---@param Message string
 local function Log(Message)
 	if not Config.Verbose then
@@ -16,31 +21,6 @@ local function Log(Message)
 	end
 
 	print("[RecipeChanger] " .. Message)
-end
-
--- Returns length of table
----@param Table table
----@return int32
-local function Len(Table)
-   local Count = 0
-   for _ in pairs(Table) do 
-      Count = Count + 1 
-   end
-
-   return Count
-end
-
--- Returns keys of table
----@param Table table<string, any>
----@return string[]
-local function Keys(Table)
-	local Keys = {}
-
-	for Key,_ in pairs(Table) do
-		table.insert(Keys, Key)
-	end
-
-	return Keys
 end
 
 -- Fetch ItemRecipeDT access
@@ -86,9 +66,9 @@ end
 -- Replacing the recipe with the modified one
 ---@param Name string
 ---@param RecipeConfig RecipeConfig
-local function ModifyRecipe(Name, RecipeConfig)
+---@param DTRow FPalItemRecipe
+local function ModifyRecipe(Name, RecipeConfig, DTRow)
 	local DT = ItemRecipeDTAccess.DataTable;
-	local DTRow = DT:FindRow(Name)
 
 	DT:RemoveRow(Name)
 
@@ -104,7 +84,7 @@ local function ModifyRecipe(Name, RecipeConfig)
 
 	if RecipeConfig.Materials then
 		for Key, MaterialConfig in pairs(RecipeConfig.Materials) do
-			if Key >= 1 and Key <= 5 then
+			if Key >= 1 and Key <= MAX_MATERIAL_COUNT then
 				local Prop = "Material" .. Key
 				if MaterialConfig.Name then
 					DTRow[Prop .. "_Id"] = FName(MaterialConfig.Name)
@@ -134,42 +114,36 @@ local function Initialize()
 		return false
 	end
 
-	local SkipCount = 0
-	local Keys = Keys(Config.Recipes)
+	if not Config or not Config.Recipes then
+        Log("Error: Config.lua is missing or 'Recipes' table not found!")
+        return true
+    end
+
+	---@type string[]
+	local FailedNames = {}
 
 	Log("Modifying recipes...")
-	while(Len(Config.Recipes) > SkipCount)
-	do
-		local Name = Keys[SkipCount + 1]
-		local RecipeConfig = Config.Recipes[Name]
-		
-		if Name and RecipeConfig then
-			Log("Get next recipe for (" .. Name .. ")")
+	for Name, RecipeConfig in pairs(Config.Recipes)
+	do		
+		Log("Get next recipe for (" .. Name .. ")")
 
-			if CheckRecipe(Name).IsExists then
-				Log("Recipe found!")
+		local Check = CheckRecipe(Name)
 
-				ModifyRecipe(Name, RecipeConfig)
-
-				Config.Recipes[Name] = nil
-				table.remove(Keys, SkipCount + 1)
-			else 
-				Log("Recipe not found!")
-				SkipCount = SkipCount + 1
-			end
-		else
-			Log("Unknow error, next item from config is not accessible!")
-			SkipCount = SkipCount + 1
+		if Check.IsExists then
+			Log("Recipe found!")
+			ModifyRecipe(Name, RecipeConfig, Check.Recipe)
+		else 
+			Log("Recipe not found!")
+			table.insert(FailedNames, Name)
 		end
-
 	end
 
 	Log("Recipe modification done")
 
-	if Len(Config.Recipes) > 0 then
+	if #FailedNames > 0 then
 		Log("The following recipes failed to update:")
-		for Key,_ in pairs(Config.Recipes) do
-			Log("\t\t" .. Key)
+		for _,Name in pairs(FailedNames) do
+			Log("\t\t" .. Name)
 		end
 	end
 
