@@ -1,0 +1,9 @@
+{
+    "AssaultRifleBullet": {
+        "OutputAmount": 20
+    },
+
+    "HandgunBullet": {
+        "OutputAmount": 10
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "PalSphere": {
+        "OutputAmount": 10,
+        "WorkAmount": 10,
+        "ExpRate": 1,
+        "Materials": {
+            "1": { "Name": "Wood", "Amount": 5 },
+            "2": { "Name": "Stone", "Amount": 10 },
+            "3": { "Name": "None", "Amount": 0 }
+        }
+    }
+}

@@ -25,7 +25,7 @@ end
 
 -- Fetch ItemRecipeDT access
 ---@return PalMasterDataTableAccess_ItemRecipe
-local function getAccess()
+local function GetAccess()
 	---@type PalMasterDataTableAccess_ItemRecipe FindFirstOf
 	return FindFirstOf("PalMasterDataTableAccess_ItemRecipe")
 end
@@ -39,7 +39,7 @@ local function InitializeAccess()
 		return true
 	end
 
-	local access = getAccess()
+	local access = GetAccess()
 	if not access or not access:IsValid() then
 		Log("No instance of PalMasterDataTableAccess_ItemRecipe found!")
 		return false
