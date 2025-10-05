@@ -67,6 +67,38 @@ local config = {
 
 ```
 
+#### JSON Recipes
+
+You can define your recipe modifications in JSON too. For this create a new or edit an existing json file in the project **`Recipes`** directory.
+```
+RecipeChanger/
+└── Scripts/
+    └── Recipes/
+        ├── sphere.json
+        └── ammo.json
+            
+```
+The filename can be almost anything, but it must not contain special characters and must have a **`.json`** extension.
+There can be multiple JSON files, the mod will use all of them. The JSON objects should be constructed with the same structure as the Lua tables.
+
+Example JSON:
+```json
+
+{
+    "PalSphere": {
+        "OutputAmount": 10,
+        "WorkAmount": 10,
+        "ExpRate": 1,
+        "Materials": {
+            "1": { "Name": "Wood", "Amount": 5 },
+            "2": { "Name": "Stone", "Amount": 10 },
+            "3": { "Name": "None", "Amount": 0 }
+        }
+    }
+}
+
+```
+
 ---
 
 ## ⬇️ Prerequisites
@@ -86,7 +118,7 @@ Locate and download the [newest release](https://github.com/Worsthof/recipe-chan
 The Mod will be in a ```.zip``` file, named ```RecipeChanger.zip```.
 
 ### 3. Install the mod
-Download the latest release of this mod and extract its contents to your ```...\Mods``` folder.
+Extract the mod contents to your ```...\Mods``` folder.
 After this the folder structure should look something like this:
 ```
 ue4ss/
@@ -94,10 +126,17 @@ ue4ss/
     └── RecipeChanger/
         ├── LICENSE
         ├── README.md
-        ├── RecipeNames.csv (Optional helper file)
+        ├── RecipeNames.csv
         └── Scripts/
-            ├── config.lua (Configuration file, required by main.lua)
-            └── main.lua (The main script)
+            ├── config.lua
+            ├── main.lua
+            ├── utils.lua
+            ├── file_handler.lua
+            ├── Recipes/
+            │   ├── sphere.json
+            │   └── ammo.json
+            └── Libs/
+                └── dkjson.lua
 ```
 ### 4. Apply Engine Compatibility Config
 Due to updates in the game engine, a special configuration file is required for UE4SS to function correctly with Palworld's memory layout.
