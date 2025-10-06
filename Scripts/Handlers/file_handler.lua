@@ -2,7 +2,7 @@
 ---@return string
 local function GetScriptDirectory()
     local scriptPath = debug.getinfo(1, "S").source
-    local scriptDir = scriptPath:match("@?(.*[\\/])")
+    local scriptDir = scriptPath:match("@?(.*[\\/])"):gsub("[\\/]$", ""):match("(.*[\\/])")
 
     return scriptDir or ""
 end

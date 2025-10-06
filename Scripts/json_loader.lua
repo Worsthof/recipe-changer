@@ -1,5 +1,5 @@
 local JSONParser = require("Libs.dkjson")
-local FileHandler = require("file_handler")
+local FileHandler = require("Handlers.file_handler")
 local Utils = require("utils")
 
 ---@param Materials table<string|int32, MaterialConfig>
