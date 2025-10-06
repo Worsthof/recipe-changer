@@ -22,6 +22,10 @@ local function GetFilePathsFromDirectory(Dir, Extension)
     local Content = Pipe:read("*a")
     Pipe:close()
 
+    if Content == nil or Content == "" then
+        return {}
+    end
+
     local FoundFiles = {}
 
     for FileName in Content:gmatch("([^\n]*)\n?") do

@@ -1,10 +1,7 @@
-local JSONParser = require("Libs.dkjson")
-local FileHandler = require("file_handler")
-local Utils = require("utils")
-
 ---@class Config
 ---@field Recipes table<string, RecipeConfig>
 ---@field Verbose boolean
+---@field Initialize fun()|nil
 
 ---@class MaterialConfig
 ---@field Name string|nil
@@ -75,138 +72,21 @@ local Config = {
     Verbose = Verbose
 }
 
----@param Materials table<string|int32, MaterialConfig>
----@return table<int32, MaterialConfig>
-local function CorrectJSONRecipeMaterialKeys(Materials)
+-- Initialize config data, makes logging and recipes available
+-- Should only be called once
+local function Initialize()
+    local JSONLoader = require("json_loader")
+    local Utils = require("utils")
 
-    ---@type table<int32, MaterialConfig>
-    local CMaterials = {}
+    local JSONRecipes = JSONLoader.GetJSONRecipes()
 
-    for Key, Value in pairs(Materials) do
-        CMaterials[tonumber(Key)] = Value
+    if JSONRecipes then
+        Config.Recipes = Utils.MergeTable(Config.Recipes, JSONRecipes)
     end
-    
-    return CMaterials
+
+    Config.Initialize = nil
 end
 
--- Validate a single recipe's structure
----@param Name string
----@param RecipeConfig table
----@return boolean, string|nil
-local function ValidateRecipeConfig(Name, RecipeConfig)
-    if type(RecipeConfig) ~= "table" then
-        return false, "The entry for '" .. Name .. "' must be a table."
-    end
-
-    if RecipeConfig.OutputAmount and type(RecipeConfig.OutputAmount) ~= "number" then
-        return false, "In recipe '" .. Name .. "': 'OutputAmount' must be a number."
-    end
-    if RecipeConfig.WorkAmount and type(RecipeConfig.WorkAmount) ~= "number" then
-        return false, "In recipe '" .. Name .. "': 'WorkAmount' must be a number."
-    end
-    if RecipeConfig.ExpRate and type(RecipeConfig.ExpRate) ~= "number" then
-        return false, "In recipe '" .. Name .. "': 'ExpRate' must be a number."
-    end
-
-    if RecipeConfig.Materials then
-        if type(RecipeConfig.Materials) ~= "table" then
-            return false, "In recipe '" .. Name .. "': 'Materials' must be a table."
-        end
-        for Key, Material in pairs(RecipeConfig.Materials) do
-            if not tonumber(Key) then
-                return false, "In recipe '" .. Name .. "': A key in 'Materials' is not a number."
-            end
-            if type(Material) ~= "table" then
-                return false, "In recipe '" .. Name .. "': A value in 'Materials' is not a table."
-            end
-            if Material.Name and type(Material.Name) ~= "string" then
-                return false, "In recipe '" .. Name .. "': A material 'Name' must be a string."
-            end
-            if Material.Amount and type(Material.Amount) ~= "number" then
-                return false, "In recipe '" .. Name .. "': A material 'Amount' must be a number."
-            end
-        end
-    end
-
-    return true, nil
-end
-
----@param Content string
----@return table<string, RecipeConfig>|nil, string|nil
-local function ParseJSONRecipe(Content)
-
-    local Result, ParsedData = pcall(JSONParser.decode, Content)
-
-    if not Result then
-        return nil, "Invalid JSON syntax"
-    end
-
-    if type(ParsedData) ~= "table" then
-        return nil, "The root of the JSON file must be a table/object."
-    end
-
-    for Name, RecipeConfig in pairs(ParsedData) do
-        if type(Name) ~= "string" then
-            return nil, "A top-level key in the JSON is not a string (a recipe name)."
-        end
-        
-        local IsValid, ErrorMessage = ValidateRecipeConfig(Name, RecipeConfig)
-        if not IsValid then
-            return nil, ErrorMessage
-        end
-
-        if RecipeConfig.Materials then
-            RecipeConfig.Materials = CorrectJSONRecipeMaterialKeys(RecipeConfig.Materials)
-        end
-    end
-
-    return ParsedData
-end
-
-local function LoadJSONRecipes()
-    ---@type string[]
-    local Recipes = FileHandler.GetFilePathsFromDirectory("Recipes", "json")
-
-    ---@type string|nil
-    local Content = nil
-
-    ---@type table<string, RecipeConfig>|nil
-    local Recipe = nil
-
-    ---@type string[]
-    local FailedFiles = {}
-
-    if #Recipes < 1 then
-        print("[RecipeChanger][Config] JSON Recipes not found or Recipes DIR not exists!")
-        return
-    end
-
-    for _,FilePath in pairs(Recipes) do
-        Content = FileHandler.ReadFileContent(FilePath)
-
-        if Content then
-            Recipe, ErrorMessage = ParseJSONRecipe(Content)
-
-            if Recipe then
-                Config.Recipes = Utils.MergeTable(Config.Recipes, Recipe)
-            else
-                print("[RecipeChanger][Config] Cannot parse content of file (" .. FilePath .. "):" .. ErrorMessage)
-                table.insert(FailedFiles, FilePath)
-            end
-        else
-            print("[RecipeChanger][Config] Cannot read content of file (" .. FilePath .. ")")
-            table.insert(FailedFiles, FilePath)
-        end
-    end
-
-    if #FailedFiles > 0 then
-        print("[RecipeChanger][Config] The following recipe files failed to load:")
-        for _, FilePath in pairs(FailedFiles) do
-            print("[RecipeChanger][Config] \t\t" .. FilePath)
-        end
-    end
-end
-
-LoadJSONRecipes()
+Config.Initialize = Initialize
 
 return Config
