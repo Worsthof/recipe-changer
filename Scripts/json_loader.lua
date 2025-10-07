@@ -2,6 +2,9 @@ local JSONParser = require("Libs.dkjson")
 local FileHandler = require("Handlers.file_handler")
 local Utils = require("utils")
 
+---@type string
+local LogSection = "JSON"
+
 ---@param Materials table<string|int32, MaterialConfig>
 ---@return table<int32, MaterialConfig>
 local function CorrectJSONRecipeMaterialKeys(Materials)
@@ -93,7 +96,7 @@ end
 ---@return table<string, RecipeConfig>|nil
 local function GetJSONRecipes()
     if Utils.GetOS() ~= "windows" then
-        Utils.Log("JSON recipes are only available on windows operating system!", "JSON")
+        Utils.Log("JSON recipes are only available on windows operating system!", LogSection)
         return
     end
 
@@ -113,7 +116,7 @@ local function GetJSONRecipes()
     local FailedFiles = {}
 
     if #Recipes < 1 then
-        Utils.Log("JSON Recipes not found or Recipes DIR not exists!", "JSON")
+        Utils.Log("JSON Recipes not found or Recipes DIR not exists!", LogSection)
         return
     end
 
@@ -124,22 +127,22 @@ local function GetJSONRecipes()
             Recipe, ErrorMessage = ParseJSONRecipe(Content)
 
             if Recipe then
-                Utils.Log("JSON recipe loaded: " .. FilePath:match("([^/\\]+)$"), "JSON")
+                Utils.Log("JSON recipe loaded: " .. FilePath:match("([^/\\]+)$"), LogSection)
                 RecipesOutput = Utils.MergeTable(RecipesOutput, Recipe)
             else
-                Utils.Log("Cannot parse content of file (" .. FilePath:match("([^/\\]+)$") .. "):" .. ErrorMessage, "JSON")
+                Utils.Log("Cannot parse content of file (" .. FilePath:match("([^/\\]+)$") .. "):" .. ErrorMessage, LogSection)
                 table.insert(FailedFiles, FilePath)
             end
         else
-            Utils.Log("Cannot read content of file (" .. FilePath .. ")", "JSON")
+            Utils.Log("Cannot read content of file (" .. FilePath .. ")", LogSection)
             table.insert(FailedFiles, FilePath)
         end
     end
 
     if #FailedFiles > 0 then
-        Utils.Log("The following recipe files failed to load:", "JSON")
+        Utils.Log("The following recipe files failed to load:", LogSection)
         for _, FilePath in pairs(FailedFiles) do
-            Utils.Log("\t\t" .. FilePath, "JSON")
+            Utils.Log("\t\t" .. FilePath, LogSection)
         end
     end
 

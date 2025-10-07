@@ -1,9 +1,10 @@
 local Utils = require("utils")
+local ItemDTH = require("Handlers.DataTables.items")
 
----@class PalMasterDataTableAccess_ItemRecipe: UPalMasterDataTableAccess_ItemRecipe
----@field BP_FindRow fun(self: PalMasterDataTableAccess_ItemRecipe, RowName: FName, bResult: {bResult: boolean}): FPalItemRecipe
+---@type string
+local LogSection = "ItemRecipesDTH"
 
----@type PalMasterDataTableAccess_ItemRecipe
+---@type UPalMasterDataTableAccess_ItemRecipe
 local ItemRecipeDTAccess = nil
 
 -- Maximum number of materials on FPalItemRecipe
@@ -11,9 +12,9 @@ local ItemRecipeDTAccess = nil
 local MAX_MATERIAL_COUNT = 5
 
 -- Fetch ItemRecipeDT access
----@return PalMasterDataTableAccess_ItemRecipe
+---@return UPalMasterDataTableAccess_ItemRecipe
 local function GetAccess()
-	---@type PalMasterDataTableAccess_ItemRecipe
+	---@type UPalMasterDataTableAccess_ItemRecipe
 	return FindFirstOf("PalMasterDataTableAccess_ItemRecipe")
 end
 
@@ -22,51 +23,49 @@ end
 local function InitializeAccess()
 
 	if ItemRecipeDTAccess and ItemRecipeDTAccess:IsValid() then
-		Utils.Log("Access found!", "ItemRecipesDT")
+		Utils.Log("Access found!", LogSection)
 		return true
 	end
 
-	local access = GetAccess()
-	if not access or not access:IsValid() then
-		Utils.Log("No instance of PalMasterDataTableAccess_ItemRecipe found!", "ItemRecipesDT")
+	local Access = GetAccess()
+	if not Access or not Access:IsValid() then
+		Utils.Log("No instance of PalMasterDataTableAccess_ItemRecipe found!", LogSection)
 		return false
 	end
 
-	ItemRecipeDTAccess = access
-	Utils.Log("Access initialized!", "ItemRecipesDT")
+	ItemRecipeDTAccess = Access
+	Utils.Log("Access initialized!", LogSection)
 
 	return true
 end
 
--- Attempts to retrieve row via Blueprint method
+-- Check if recipe is exists
 ---@param Name string
----@return {IsExists: boolean, Recipe: FPalItemRecipe}
+---@return boolean
 local function CheckRecipe(Name)
-	
-	local Out = { bResult = false }
-
-	local Recipe = ItemRecipeDTAccess:BP_FindRow(FName(Name), Out)
-
-	return {["IsExists"] = Out.bResult, ["Recipe"] = Recipe}
+	return ItemRecipeDTAccess.DataTable:FindRow(Name) ~= nil
 end
 
--- Replacing the recipe with the modified one
----@param Name string
+-- Modify recipe based on config parameters
 ---@param RecipeConfig RecipeConfig
 ---@param DTRow FPalItemRecipe
-local function ModifyRecipe(Name, RecipeConfig, DTRow)
-	local DT = ItemRecipeDTAccess.DataTable;
+function Modify(RecipeConfig, DTRow)
+	local Item = ItemDTH.GetItem(DTRow.Product_Id)
+	local OutputAmount = RecipeConfig.OutputAmount
 
-	DT:RemoveRow(Name)
-
-	if RecipeConfig.OutputAmount then
-		DTRow.Product_Count = RecipeConfig.OutputAmount
-		Utils.Log("Product_Count changed to " .. RecipeConfig.OutputAmount, "ItemRecipesDT")
+	if OutputAmount then
+		if OutputAmount > Item.MaxStackCount then
+			Utils.Log("OutputAmount is higher than maximum stack count of this item!", "ItemsRecipesDT")
+			OutputAmount = Item.MaxStackCount
+			Utils.Log("OutputAmount changed to maximum stack count!", "ItemsRecipesDT")
+		end
+		DTRow.Product_Count = OutputAmount
+		Utils.Log("Product_Count changed to " .. OutputAmount, LogSection)
 	end
 
 	if RecipeConfig.WorkAmount then
 		DTRow.WorkAmount = RecipeConfig.WorkAmount * 100
-		Utils.Log("WorkAmount changed to " .. RecipeConfig.WorkAmount .. " sec", "ItemRecipesDT")
+		Utils.Log("WorkAmount changed to " .. RecipeConfig.WorkAmount .. " sec", LogSection)
 	end
 
 	if RecipeConfig.Materials then
@@ -75,11 +74,11 @@ local function ModifyRecipe(Name, RecipeConfig, DTRow)
 				local Prop = "Material" .. Key
 				if MaterialConfig.Name then
 					DTRow[Prop .. "_Id"] = FName(MaterialConfig.Name)
-					Utils.Log(Prop .. "_Id" .. " changed to " .. MaterialConfig.Name, "ItemRecipesDT")
+					Utils.Log(Prop .. "_Id" .. " changed to " .. MaterialConfig.Name, LogSection)
 				end
 				if MaterialConfig.Amount then
 					DTRow[Prop .. "_Count"] = MaterialConfig.Amount
-					Utils.Log(Prop .. "_Count" .. " changed to " .. MaterialConfig.Amount, "ItemRecipesDT")
+					Utils.Log(Prop .. "_Count" .. " changed to " .. MaterialConfig.Amount, LogSection)
 				end
 			end
 		end
@@ -87,13 +86,44 @@ local function ModifyRecipe(Name, RecipeConfig, DTRow)
 
 	if RecipeConfig.ExpRate then
 		DTRow.CraftExpRate = RecipeConfig.ExpRate
-		Utils.Log("CraftExpRate changed to " .. RecipeConfig.ExpRate, "ItemRecipesDT")
+		Utils.Log("CraftExpRate changed to " .. RecipeConfig.ExpRate, LogSection)
 	end
+end
+
+-- Replacing the recipe with the modified one
+---@param Name string
+---@param RecipeConfig RecipeConfig
+---@param DTRow FPalItemRecipe|nil
+---@overload fun(Name: string, RecipeConfig: RecipeConfig)
+local function ModifyRecipe(Name, RecipeConfig, DTRow)
+	local DT = ItemRecipeDTAccess.DataTable;
+
+	if not DTRow then
+		DTRow = DT:FindRow(Name)
+	end
+
+	DT:RemoveRow(Name)
+
+	Modify(RecipeConfig, DTRow)
 
 	DT:AddRow(Name, DTRow)
 end
 
+-- Apply modification to every recipe
+---@param RecipeConfig RecipeConfig
+local function ModifyAllRecipe(RecipeConfig)
+	local DT = ItemRecipeDTAccess.DataTable;
+
+	---@param Name string
+	---@param DTRow FPalItemRecipe
+	DT:ForEachRow(function(Name, DTRow)
+		Utils.Log("Recipe (" .. Name ..  ") updating", LogSection)
+		ModifyRecipe(Name, RecipeConfig, DTRow)
+	end)
+end
+
 return {
+	ModifyAllRecipe = ModifyAllRecipe,
     ModifyRecipe = ModifyRecipe,
     CheckRecipe = CheckRecipe,
     InitializeAccess = InitializeAccess
