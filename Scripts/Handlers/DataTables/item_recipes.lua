@@ -1,5 +1,6 @@
 local Utils = require("utils")
 local ItemDTH = require("Handlers.DataTables.items")
+local DMHandler = require("Handlers.dynamic_modifier")
 
 ---@type string
 local LogSection = "ItemRecipesDTH"
@@ -46,26 +47,45 @@ local function CheckRecipe(Name)
 	return ItemRecipeDTAccess.DataTable:FindRow(Name) ~= nil
 end
 
+---@param Target number|DynamicOperation
+---@param Operand number
+---@return number
+local function GetDynamicValue(Target, Operand)
+	if type(Target) == "number" then
+		return Target
+	end
+
+	return DMHandler.Modify(Target, Operand)
+end
+
 -- Modify recipe based on config parameters
 ---@param RecipeConfig RecipeConfig
 ---@param DTRow FPalItemRecipe
-function Modify(RecipeConfig, DTRow)
-	local Item = ItemDTH.GetItem(DTRow.Product_Id)
-	local OutputAmount = RecipeConfig.OutputAmount
+---@param Item ItemElement|nil
+---@overload fun(RecipeConfig: RecipeConfig, DTRow: FPalItemRecipe)
+function Modify(RecipeConfig, DTRow, Item)
+	if not Item then
+		Item = ItemDTH.GetItem(DTRow.Product_Id)
+	end
 
-	if OutputAmount then
+	if RecipeConfig.OutputAmount then
+		local OutputAmount = GetDynamicValue(RecipeConfig.OutputAmount, DTRow.Product_Count)
+
 		if OutputAmount > Item.MaxStackCount then
 			Utils.Log("OutputAmount is higher than maximum stack count of this item!", "ItemsRecipesDT")
 			OutputAmount = Item.MaxStackCount
 			Utils.Log("OutputAmount changed to maximum stack count!", "ItemsRecipesDT")
 		end
+
 		DTRow.Product_Count = OutputAmount
 		Utils.Log("Product_Count changed to " .. OutputAmount, LogSection)
 	end
 
 	if RecipeConfig.WorkAmount then
-		DTRow.WorkAmount = RecipeConfig.WorkAmount * 100
-		Utils.Log("WorkAmount changed to " .. RecipeConfig.WorkAmount .. " sec", LogSection)
+		local WorkAmount = GetDynamicValue(RecipeConfig.WorkAmount, DTRow.WorkAmount / 100)
+		
+		DTRow.WorkAmount = WorkAmount * 100
+		Utils.Log("WorkAmount changed to " .. WorkAmount .. " sec", LogSection)
 	end
 
 	if RecipeConfig.Materials then
@@ -77,16 +97,20 @@ function Modify(RecipeConfig, DTRow)
 					Utils.Log(Prop .. "_Id" .. " changed to " .. MaterialConfig.Name, LogSection)
 				end
 				if MaterialConfig.Amount then
-					DTRow[Prop .. "_Count"] = MaterialConfig.Amount
-					Utils.Log(Prop .. "_Count" .. " changed to " .. MaterialConfig.Amount, LogSection)
+					local MaterialAmount = GetDynamicValue(MaterialConfig.Amount, DTRow[Prop .. "_Count"])
+
+					DTRow[Prop .. "_Count"] = MaterialAmount
+					Utils.Log(Prop .. "_Count" .. " changed to " .. MaterialAmount, LogSection)
 				end
 			end
 		end
 	end
 
 	if RecipeConfig.ExpRate then
-		DTRow.CraftExpRate = RecipeConfig.ExpRate
-		Utils.Log("CraftExpRate changed to " .. RecipeConfig.ExpRate, LogSection)
+		local ExpRate = GetDynamicValue(RecipeConfig.ExpRate, DTRow.CraftExpRate)
+
+		DTRow.CraftExpRate = ExpRate
+		Utils.Log("CraftExpRate changed to " .. ExpRate, LogSection)
 	end
 end
 
@@ -94,36 +118,67 @@ end
 ---@param Name string
 ---@param RecipeConfig RecipeConfig
 ---@param DTRow FPalItemRecipe|nil
+---@param Item ItemElement|nil
 ---@overload fun(Name: string, RecipeConfig: RecipeConfig)
-local function ModifyRecipe(Name, RecipeConfig, DTRow)
+---@overload fun(Name: string, RecipeConfig: RecipeConfig, DTRow: FPalItemRecipe)
+local function ModifyRecipe(Name, RecipeConfig, DTRow, Item)
 	local DT = ItemRecipeDTAccess.DataTable;
 
 	if not DTRow then
 		DTRow = DT:FindRow(Name)
 	end
 
+	Modify(RecipeConfig, DTRow, Item)
+
 	DT:RemoveRow(Name)
-
-	Modify(RecipeConfig, DTRow)
-
 	DT:AddRow(Name, DTRow)
 end
 
 -- Apply modification to every recipe
----@param RecipeConfig RecipeConfig
-local function ModifyAllRecipe(RecipeConfig)
+---@param GlobalConfigs GlobalRecipe[]
+local function ModifyGlobalRecipes(GlobalConfigs)
 	local DT = ItemRecipeDTAccess.DataTable;
 
-	---@param Name string
-	---@param DTRow FPalItemRecipe
-	DT:ForEachRow(function(Name, DTRow)
-		Utils.Log("Recipe (" .. Name ..  ") updating", LogSection)
-		ModifyRecipe(Name, RecipeConfig, DTRow)
-	end)
+	---@type ItemElement
+	local Item = nil
+
+	---@type boolean
+	local Doable = nil
+
+	---@type RecipeConfig
+	local RecipeConfig = nil
+
+	---@type {Name:string, Data:FPalItemRecipe}[]
+	local Rows = DT:GetAllRows()
+
+	for _, Row in pairs(Rows) do
+		Utils.Log("Recipe (" .. Row.Name ..  ") updating", LogSection)
+		Item = ItemDTH.GetItem(Row.Data.Product_Id)
+
+		RecipeConfig = {}
+
+		for _, Config in ipairs(GlobalConfigs) do
+			Doable = true
+
+			if Config.TypeA and Config.TypeA ~= Item.TypeA then
+				Doable = false
+			end
+
+			if Config.TypeB and Config.TypeB ~= Item.TypeB then
+				Doable = false
+			end
+
+			if Doable then
+				Utils.MergeTable(RecipeConfig, Config.RecipeConfig)
+			end
+		end
+
+		ModifyRecipe(Row.Name, RecipeConfig, Row.Data, Item)
+	end
 end
 
 return {
-	ModifyAllRecipe = ModifyAllRecipe,
+	ModifyGlobalRecipes = ModifyGlobalRecipes,
     ModifyRecipe = ModifyRecipe,
     CheckRecipe = CheckRecipe,
     InitializeAccess = InitializeAccess

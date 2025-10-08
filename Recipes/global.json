@@ -1,0 +1,13 @@
+{
+    "*": {
+        "WorkAmount": "::MULTIPLY::0.5"
+    },
+
+    "*:Ammo": {
+        "OutputAmount": "::MULTIPLY::2"
+    },
+
+    "*:Material:MaterialIngot": {
+        "WorkAmount": "::MULTIPLY::0.2"
+    }
+}

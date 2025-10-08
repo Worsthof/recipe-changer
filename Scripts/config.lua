@@ -5,19 +5,13 @@
 
 ---@class MaterialConfig
 ---@field Name string|nil
----@field Amount int32|nil
+---@field Amount int32|DynamicOperation|nil
 
 ---@class RecipeConfig
----@field OutputAmount int32|nil
----@field WorkAmount int32|nil
+---@field OutputAmount int32|DynamicOperation|nil
+---@field WorkAmount int32|DynamicOperation|nil
 ---@field Materials table<int32, MaterialConfig>|nil
----@field ExpRate int32|nil
-
----@class ParsedRecipeConfig
----@field OutputAmount int32|nil
----@field WorkAmount int32|nil
----@field Materials table<string, MaterialConfig>|nil
----@field ExpRate int32|nil
+---@field ExpRate int32|DynamicOperation|nil
 
 -- The 'Verbose' option is to enable console logging, when set to true it will log details about the recipe changes.
 -- Useful for debugging, else it's not relevant, just leave it at false.
@@ -75,7 +69,7 @@ local Config = {
 -- Initialize config data, makes logging and recipes available
 -- Should only be called once
 local function Initialize()
-    local JSONLoader = require("json_loader")
+    local JSONLoader = require("Handlers.json_loader")
     local Utils = require("utils")
 
     local JSONRecipes = JSONLoader.GetJSONRecipes()

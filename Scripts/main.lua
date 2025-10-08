@@ -2,6 +2,7 @@ local Config = require("config") Config.Initialize()
 local Utils = require("utils")
 local ItemRecipeDTH = require("Handlers.DataTables.item_recipes")
 local ItemDTH = require("Handlers.DataTables.items")
+local GlobalsHandler = require("Handlers.globals")
 
 ---@type string
 local LogSection = "Main"
@@ -24,11 +25,12 @@ local function Initialize()
 	---@type string[]
 	local FailedNames = {}
 
-	if Config.Recipes["*"] ~= nil then
+	local GlobalRecipes = GlobalsHandler.ExtractGlobals(Config.Recipes)
+
+	if #GlobalRecipes > 0 then
     	Utils.Log("Global modification start...", LogSection)
-		ItemRecipeDTH.ModifyAllRecipe(Config.Recipes["*"])
+		ItemRecipeDTH.ModifyGlobalRecipes(GlobalRecipes)
 		Utils.Log("Global modification finished...", LogSection)
-		Config.Recipes["*"] = nil
 	end
 
 	Utils.Log("Modifying recipes...", LogSection)
