@@ -28,7 +28,7 @@ local function Log(Message, Section)
 		return
 	end
 
-    local prefix = "[RecipeChanger]"
+    local prefix = "[Tweaksmith]"
 
     if Section then
         prefix = prefix .. "[" .. Section .. "]"
