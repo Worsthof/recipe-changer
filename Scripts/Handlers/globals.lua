@@ -4,7 +4,7 @@
 ---@field TypeA string|nil
 ---@field TypeB string|nil
 ---@field Level int32
----@field Sort int32|nil
+---@field Sort int32
 
 ---Counts the number of colons in a key to determine its specificity level.
 ---@param Key string
@@ -26,8 +26,8 @@ local function SortGlobals(GlobalRecipes)
             return a.Level < b.Level
         end
 
-        local aSort = a.Sort or 9999
-        local bSort = b.Sort or 9999
+        local aSort = a.Sort
+        local bSort = b.Sort
         
         return aSort < bSort
     end)
@@ -46,7 +46,7 @@ local function ConstructGlobal(Key, Config)
         TypeA = nil,
         TypeB = nil,
         Level = GetKeyLevel(Key),
-        Sort = nil
+        Sort = 0
     }
 
     local Sort = Key:gmatch("^%*([1-9]%d*)")()
