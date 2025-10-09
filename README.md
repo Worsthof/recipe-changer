@@ -143,7 +143,7 @@ This example would set every item recipe `WorkAmount` to 30 sec, but every **`Am
 
 You can find the available `ItemTypes` in `ItemTypeA.csv` and `ItemTypeB.csv`.
 
-##### Dynamic modifiers
+#### Dynamic modifiers
 
 If you want to apply changes relatively to the original recipe values, you can do that by supplying a specific string which correctly matches the `Dynamic modifier pattern` to the value of a property.
 
