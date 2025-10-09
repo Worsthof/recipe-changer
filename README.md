@@ -182,7 +182,7 @@ Usually looking like this:
 ```...\Palworld\Pal\Binaries\Win64\ue4ss\Mods```
 
 ### 2. Download the Mod
-Locate and download the [newest release](https://github.com/Worsthof/recipe-changer/releases).
+Locate and download the [newest release](https://github.com/Worsthof/tweaksmith/releases).
 The Mod will be in a ```.zip``` file, named ```RecipeChanger.zip```.
 
 ### 3. Install the mod
