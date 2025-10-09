@@ -40,7 +40,7 @@ It is AI generated so take it with a grain of salt.
 
 You can define your recipe modifications in JSON files. For this create a new or edit an existing json file in the project **`Recipes`** directory.
 ```
-RecipeChanger/
+Tweaksmith/
 ├── Scripts/
 └── Recipes/
     ├── global.json
@@ -191,7 +191,7 @@ After this the folder structure should look something like this:
 ```
 ue4ss/
 └── Mods/
-    └── RecipeChanger/
+    └── Tweaksmith/
         ├── Scripts/
         │   └── main.lua
         │   ...
@@ -218,7 +218,7 @@ ue4ss/
 Go back to the main UE4SS Mods folder ```...ue4ss\Mods``` and open the ```mods.txt``` file.
 Add the following line to the end of the file:
 ```
-RecipeChanger : 1
+Tweaksmith : 1
 ```
 
 Save and close ```mods.txt```. The mod is now active and will load the next time you launch Palworld!
