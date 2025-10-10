@@ -3,6 +3,16 @@ local FileHandler = require("Handlers.file_handler")
 local Utils = require("utils")
 local DMHandler = require("Handlers.dynamic_modifier")
 
+---@class MaterialConfig
+---@field Name string|nil
+---@field Amount int32|DynamicOperation|nil
+
+---@class RecipeConfig
+---@field OutputAmount int32|DynamicOperation|nil
+---@field WorkAmount int32|DynamicOperation|nil
+---@field Materials table<int32, MaterialConfig>|nil
+---@field ExpRate int32|DynamicOperation|nil
+
 ---@alias UnprocessedMaterialConfig { Name?: any, Amount?: any }
 ---@alias UnprocessedRecipeConfig { OutputAmount?: any, WorkAmount?: any, ExpRate?: any, Materials?: table<number, UnprocessedMaterialConfig> }
 

@@ -1,8 +1,9 @@
-local Config = require("config") Config.Initialize()
+local Config = require("config")
 local Utils = require("utils")
+local JSONLoader = require("Handlers.json_loader")
+local GlobalsHandler = require("Handlers.globals")
 local ItemRecipeDTH = require("Handlers.DataTables.item_recipes")
 local ItemDTH = require("Handlers.DataTables.items")
-local GlobalsHandler = require("Handlers.globals")
 
 ---@type string
 local LogSection = "Main"
@@ -17,7 +18,10 @@ local function Initialize()
 		return false
 	end
 
-	if not Config or not Config.Recipes then
+	---@type table<string, RecipeConfig>|nil
+	local Recipes = JSONLoader.GetJSONRecipes()
+
+	if not Config or not Recipes then
         Utils.Log("Error: Config.lua is missing or 'Recipes' table not found!", LogSection)
         return true
     end
@@ -25,7 +29,7 @@ local function Initialize()
 	---@type string[]
 	local FailedNames = {}
 
-	local GlobalRecipes = GlobalsHandler.ExtractGlobals(Config.Recipes)
+	local GlobalRecipes = GlobalsHandler.ExtractGlobals(Recipes)
 
 	if #GlobalRecipes > 0 then
     	Utils.Log("Global modification start...", LogSection)
@@ -34,7 +38,7 @@ local function Initialize()
 	end
 
 	Utils.Log("Modifying recipes...", LogSection)
-	for Name, RecipeConfig in pairs(Config.Recipes)
+	for Name, RecipeConfig in pairs(Recipes)
 	do		
 		Utils.Log("Get next recipe for (" .. Name .. ")", LogSection)
 
