@@ -69,12 +69,17 @@ function Modify(RecipeConfig, DTRow, Item)
 	end
 
 	if RecipeConfig.OutputAmount then
-		local OutputAmount = GetDynamicValue(RecipeConfig.OutputAmount, DTRow.Product_Count)
+		local OutputAmount, IsClamped = Utils.Clamp(
+			GetDynamicValue(
+				RecipeConfig.OutputAmount, 
+				DTRow.Product_Count
+			),
+			Item.MaxStackCount
+		)
 
-		if OutputAmount > Item.MaxStackCount then
-			Utils.Log("OutputAmount is higher than maximum stack count of this item!", "ItemsRecipesDT")
-			OutputAmount = Item.MaxStackCount
-			Utils.Log("OutputAmount changed to maximum stack count!", "ItemsRecipesDT")
+		if IsClamped then
+			Utils.Log("OutputAmount is higher than maximum stack count of this item!", LogSection)
+			Utils.Log("OutputAmount changed to maximum stack count!", LogSection)
 		end
 
 		DTRow.Product_Count = OutputAmount
@@ -92,9 +97,15 @@ function Modify(RecipeConfig, DTRow, Item)
 		for Key, MaterialConfig in pairs(RecipeConfig.Materials) do
 			if Key >= 1 and Key <= MAX_MATERIAL_COUNT then
 				local Prop = "Material" .. Key
+				
 				if MaterialConfig.Name then
-					DTRow[Prop .. "_Id"] = FName(MaterialConfig.Name)
-					Utils.Log(Prop .. "_Id" .. " changed to " .. MaterialConfig.Name, LogSection)
+					local MaterialName = FName(MaterialConfig.Name)
+					if ItemDTH.CheckItem(MaterialName) then
+						DTRow[Prop .. "_Id"] = MaterialName
+						Utils.Log(Prop .. "_Id" .. " changed to " .. MaterialConfig.Name, LogSection)
+					else
+						Utils.Log(Prop .. "_Id[" .. MaterialConfig.Name .. "] doesn't exists! Skipping modification!", LogSection)
+					end
 				end
 				if MaterialConfig.Amount then
 					local MaterialAmount = GetDynamicValue(MaterialConfig.Amount, DTRow[Prop .. "_Count"])

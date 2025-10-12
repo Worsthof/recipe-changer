@@ -37,6 +37,26 @@ local function Log(Message, Section)
 	print(prefix .. " " .. Message)
 end
 
+-- Clamps a value between a minimum and maximum.
+-- Secondary return indicates its been clamped or not
+---@param Value float The number to clamp.
+---@param Max float|nil The upper bound, defaults to 9999.
+---@param Min float|nil The lower bound, defaults to 0.
+---@return float, boolean
+---@overload fun(Value: float)
+---@overload fun(Value: float, Max: float)
+---@overload fun(Value: float, Max: float, Min: float)
+local function Clamp(Value, Max, Min)
+    Min = Min or 0
+    Max = Max or 9999
+
+    if Min > Max then
+        Min, Max = Max, Min
+    end
+
+    return math.min(Max, math.max(Min, Value)), (Value > Max or Value < Min)
+end
+
 -- Returns the running operating system name
 ---@return string
 local function GetOS()
@@ -54,5 +74,6 @@ end
 return {
     MergeTable = MergeTable,
     Log = Log,
-    GetOS = GetOS
+    GetOS = GetOS,
+    Clamp = Clamp
 }
