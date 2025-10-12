@@ -9,6 +9,7 @@ This mod is designed for simple **quality-of-life** changes or balance adjustmen
 
 This allows you to globally adjust the following key recipe properties:
 
+* **`OutputItem`**: The name of item to be produced.
 * **`OutputAmount`**: The number of items produced per single craft.
 * **`WorkAmount`**: The base time (in seconds) required for the craft.
 * **`Materials`**: Which materials are required and the amount of each one.
@@ -56,6 +57,7 @@ Example JSON:
 ```json
 {
     "PalSphere": {
+        "OutputItem": "Arrow",
         "OutputAmount": 10,
         "WorkAmount": 10,
         "ExpRate": 1,

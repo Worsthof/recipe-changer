@@ -1,5 +1,6 @@
 {
     "PalSphere": {
+        "OutputItem": "Arrow",
         "OutputAmount": 10,
         "WorkAmount": 10,
         "ExpRate": 1,

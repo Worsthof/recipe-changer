@@ -8,6 +8,7 @@ local DMHandler = require("Handlers.dynamic_modifier")
 ---@field Amount int32|DynamicOperation|nil
 
 ---@class RecipeConfig
+---@field OutputItem string|nil
 ---@field OutputAmount int32|DynamicOperation|nil
 ---@field WorkAmount int32|DynamicOperation|nil
 ---@field Materials table<int32, MaterialConfig>|nil
@@ -54,6 +55,9 @@ end
 ---@param RecipeConfig table
 ---@return boolean, string|nil
 local function ValidateRecipeConfig(Name, RecipeConfig)
+    if RecipeConfig.OutputItem and type(RecipeConfig.OutputItem) ~= "string" then
+        return false, "In recipe '" .. Name .. "': 'OutputItem' must be a string."
+    end
     if RecipeConfig.OutputAmount and not IsValidType(RecipeConfig.OutputAmount) then
         return false, "In recipe '" .. Name .. "': 'OutputAmount' must be a number or a valid dynamic modifier."
     end

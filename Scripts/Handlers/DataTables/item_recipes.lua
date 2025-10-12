@@ -68,6 +68,22 @@ function Modify(RecipeConfig, DTRow, Item)
 		Item = ItemDTH.GetItem(DTRow.Product_Id)
 	end
 
+	if RecipeConfig.OutputItem then
+		local ItemName = FName(RecipeConfig.OutputItem)
+
+		if ItemDTH.CheckItem(ItemName) then
+			DTRow.Product_Id = ItemName
+			Utils.Log("Product_Id changed to " .. RecipeConfig.OutputItem, LogSection)
+			Item = ItemDTH.GetItem(ItemName)
+			if Item.MaxStackCount < DTRow.Product_Count then
+				DTRow.Product_Count = Item.MaxStackCount
+				Utils.Log("Product_Count changed to " .. Item.MaxStackCount .. " due to modified Product_Id MaxStackCount!", LogSection)
+			end
+		else
+			Utils.Log("Product_Id[" .. RecipeConfig.OutputItem .. "] doesn't exists! Skipping modification!", LogSection)
+		end
+	end
+
 	if RecipeConfig.OutputAmount then
 		local OutputAmount, IsClamped = Utils.Clamp(
 			GetDynamicValue(
